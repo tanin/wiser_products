@@ -15,4 +15,5 @@ group :development, :test do
   gem 'spring'
   gem "pry-rails"
   gem "pry-stack_explorer"
+  gem "factory_girl_rails", "~> 4.0"
 end
