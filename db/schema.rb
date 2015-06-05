@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150605144553) do
+ActiveRecord::Schema.define(version: 20150605150252) do
 
   create_table "products", force: true do |t|
     t.string   "name",       limit: 32
@@ -20,5 +20,9 @@ ActiveRecord::Schema.define(version: 20150605144553) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "products", ["category"], name: "index_products_on_category"
+  add_index "products", ["name"], name: "index_products_on_name"
+  add_index "products", ["sku"], name: "index_products_on_sku"
 
 end
