@@ -11,6 +11,6 @@ shared_examples_for "a string field validator" do |field_name, chars_count|
   it "should validate #{field_name} length" do
     product.send("#{field_name}=", "x" * (chars_count.to_i + 1))
     expect(product.valid?).to eq(false)
-    expect(product.errors[:name].first).to eq("#{chars_count} characters is the maximum allowed")
+    expect(product.errors[field_name].first).to eq("#{chars_count} characters is the maximum allowed")
   end
 end

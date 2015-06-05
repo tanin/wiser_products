@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :product do
-    name "Supadupa product"
-    sku  "KlJSP345"
-    category "green"
+    name "Supadupa Product"
+    sku  "KlJ100"
+    category "Green"
   end
 end
