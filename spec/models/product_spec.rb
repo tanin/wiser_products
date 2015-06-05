@@ -18,9 +18,11 @@ describe Product, type: :model do
         expect(product_1.errors[:sku].first).to eq("has already been taken")
       end
     end
+  end
 
-    context :category do
-      it_should_behave_like "a string field validator", :category, 10
+  describe :category do
+    it "should has category" do
+      expect(product.category.name).to eq("Green")
     end
   end
 end

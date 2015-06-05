@@ -11,17 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150605150252) do
+ActiveRecord::Schema.define(version: 20150605193246) do
 
-  create_table "products", force: true do |t|
+  create_table "categories", force: true do |t|
     t.string   "name",       limit: 32
-    t.string   "sku",        limit: 6
-    t.string   "category",   limit: 10
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "products", ["category"], name: "index_products_on_category"
+  create_table "products", force: true do |t|
+    t.string   "name",        limit: 32
+    t.string   "sku",         limit: 6
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "category_id"
+  end
+
+  add_index "products", ["category_id"], name: "index_products_on_category_id"
   add_index "products", ["name"], name: "index_products_on_name"
   add_index "products", ["sku"], name: "index_products_on_sku"
 
