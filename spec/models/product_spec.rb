@@ -10,6 +10,13 @@ describe Product, type: :model do
 
     context :sku do
       it_should_behave_like "a string field validator", :sku, 6
+
+      it "should be uniq" do
+        expect(product).to be_valid
+        product_1 = build(:product)
+        expect(product_1).to_not be_valid
+        expect(product_1.errors[:sku].first).to eq("has already been taken")
+      end
     end
 
     context :category do
