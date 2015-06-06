@@ -41,35 +41,18 @@
     @_fetchProducts()
 
   render: ->
-    cardsNode = @state.products.map (product) ->
-      <ProductCard key={product.id} data={product}/>
+    React.DOM.div
+      className: 'products'
+      React.DOM.table
+        className: 'table table-bordered'
+        React.DOM.thead null,
+          React.DOM.tr null,
+            React.DOM.th null, 'id'
+            React.DOM.th null, 'Name'
+            React.DOM.th null, 'SKU'
+            React.DOM.th null, 'Category'
+        React.DOM.tbody null,
+          for product in @state.products
+            React.createElement ProductCard, data: product, key: product.id
 
-    noDataNode =
-      <div className="warning">
-        <span className="fa-stack">
-          <i className="fa fa-meh-o fa-stack-2x"></i>
-        </span>
-        <h4>No products found...</h4>
-      </div>
-
-    <div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>Name</th>
-            <th>SKU</th>
-            <th>Category</th>
-          </tr>
-        </thead>
-        <tbody>
-        {
-          if @state.products.length > 0
-            {cardsNode}
-          else if @state.didFetchData
-            {noDataNode}
-        }
-        </tbody>
-      </table>
-      <Paginator totalPages={@state.meta.total_pages} currentPage={@state.meta.current_page} onPaginate={@_handleOnPaginate}/>
-    </div>
+      React.createElement Paginator, totalPages: @state.meta.total_pages, currentPage: @state.meta.current_page, onPaginate: @_handleOnPaginate
