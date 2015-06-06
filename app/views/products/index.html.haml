@@ -1,4 +1,4 @@
 %HR
 .container.theme-showcase{role: "main"}
   #content
-    = react_component 'Products', {products_path: products_path}, :div
+    = react_component 'Products', {products_path: products_path, by_category: params[:by_category]}, :div

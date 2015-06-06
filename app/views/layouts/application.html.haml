@@ -24,9 +24,10 @@
                 Categories
                 %span.caret
               %ul.dropdown-menu{role: "menu"}
-                - Category.all.each do |category|
+                %li
+                  = link_to 'All', products_path
+                - (Category.all).each do |category|
                   %li.divider
                   %li
-                    %a{href: "#"}= category.name
-        / /.nav-collapse
+                    = link_to category.name, products_path(by_category: category.id)
     = yield

@@ -9,8 +9,13 @@
     @_fetchProduct({})
 
   _fetchProduct: (data)->
+    url = @props.products_path
+
+    unless @props.by_category == null
+      url = "#{@props.products_path}?by_category=#{@props.by_category}"
+
     $.ajax
-      url: @props.products_path
+      url: url
       dataType: 'json'
       data: data
     .done @_fetchDataDone
