@@ -21,6 +21,7 @@ gem 'sprockets-rails'
 gem 'inherited_resources'
 gem 'has_scope'
 gem 'responders'
+gem 'coffee-rails'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'

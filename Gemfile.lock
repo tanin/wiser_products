@@ -203,6 +203,7 @@ PLATFORMS
 DEPENDENCIES
   autoprefixer-rails
   bootstrap-sass (~> 3.3.4)
+  coffee-rails
   factory_girl_rails (~> 4.0)
   haml-rails (~> 0.9)
   has_scope
