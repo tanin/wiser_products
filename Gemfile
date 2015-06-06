@@ -20,6 +20,7 @@ gem 'showdown-rails'
 gem 'sprockets-rails'
 gem 'inherited_resources'
 gem 'has_scope'
+gem 'responders'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
