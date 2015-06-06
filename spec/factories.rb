@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :category do
-    name "Green"
+    name "green"
   end
 
   factory :product do

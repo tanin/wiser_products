@@ -22,7 +22,7 @@ describe Product, type: :model do
 
   describe :category do
     it "should has category" do
-      expect(product.category.name).to eq("Green")
+      expect(product.category.name).to eq("green")
     end
   end
 end
