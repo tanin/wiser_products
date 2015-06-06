@@ -40,6 +40,15 @@
     @state.fetchData.page = pageNumber
     @_fetchProducts()
 
+  _deleteProduct: (product) ->
+    products = @state.products.slice()
+    index = products.indexOf product
+    products.splice index, 1
+    @replaceState
+      didFetchData: true
+      products: products
+      meta: @state.meta
+
   render: ->
     React.DOM.div
       className: 'products'
@@ -51,8 +60,9 @@
             React.DOM.th null, 'Name'
             React.DOM.th null, 'SKU'
             React.DOM.th null, 'Category'
+            React.DOM.th null, 'Actions'
         React.DOM.tbody null,
           for product in @state.products
-            React.createElement ProductCard, data: product, key: product.id
+            React.createElement ProductCard, data: product, key: product.id, handleDeleteProduct: @_deleteProduct
 
       React.createElement Paginator, totalPages: @state.meta.total_pages, currentPage: @state.meta.current_page, onPaginate: @_handleOnPaginate
