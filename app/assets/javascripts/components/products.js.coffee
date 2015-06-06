@@ -41,9 +41,8 @@
     @_fetchProducts()
 
   _deleteProduct: (product) ->
-    products = @state.products.slice()
-    index = products.indexOf product
-    products.splice index, 1
+    index = @state.products.indexOf product
+    products = React.addons.update(@state.products, { $splice: [[index, 1]] })
     @replaceState
       didFetchData: true
       products: products
