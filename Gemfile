@@ -23,6 +23,7 @@ gem 'has_scope'
 gem 'responders'
 gem 'coffee-rails'
 gem 'sprockets-coffee-react'
+gem 'kaminari'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
