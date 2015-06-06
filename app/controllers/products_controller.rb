@@ -1,6 +1,6 @@
 class ProductsController < InheritedResources::Base
   respond_to :html, :json
-  actions :index, :update
+  actions :index, :update, :destroy
   has_scope :by_category
 
   def index
