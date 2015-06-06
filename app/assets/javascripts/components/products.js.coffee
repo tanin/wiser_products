@@ -4,11 +4,17 @@
   getInitialState: ->
     didFetchData: false
     products: []
+    meta:
+      total_pages: 0
+      current_page: 1
+      total_count: 0
+    fetchData:
+      page: 1
 
   componentDidMount: ->
-    @_fetchProduct({})
+    @_fetchProducts({})
 
-  _fetchProduct: (data)->
+  _fetchProducts: (data)->
     url = @props.products_path
 
     unless @props.by_category == null
@@ -17,17 +23,22 @@
     $.ajax
       url: url
       dataType: 'json'
-      data: data
+      data: @state.fetchData
     .done @_fetchDataDone
     .fail @_fetchDataFail
 
   _fetchDataDone: (data, textStatus, jqXHR) ->
     @setState
       didFetchData: true
-      products: data
+      products: data.products
+      meta: data.meta
 
   _fetchDataFail: (xhr, status, err) =>
     console.error @props.url, status, err.toString()
+
+  _handleOnPaginate: (pageNumber) ->
+    @state.fetchData.page = pageNumber
+    @_fetchProducts()
 
   render: ->
     cardsNode = @state.products.map (product) ->
@@ -41,21 +52,24 @@
         <h4>No products found...</h4>
       </div>
 
-    <table className="table">
-      <thead>
-        <tr>
-          <th>id</th>
-          <th>Name</th>
-          <th>SKU</th>
-          <th>Category</th>
-        </tr>
-      </thead>
-      <tbody>
-      {
-        if @state.products.length > 0
-          {cardsNode}
-        else if @state.didFetchData
-          {noDataNode}
-      }
-      </tbody>
-    </table>
+    <div>
+      <table className="table">
+        <thead>
+          <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>SKU</th>
+            <th>Category</th>
+          </tr>
+        </thead>
+        <tbody>
+        {
+          if @state.products.length > 0
+            {cardsNode}
+          else if @state.didFetchData
+            {noDataNode}
+        }
+        </tbody>
+      </table>
+      <Paginator totalPages={@state.meta.total_pages} currentPage={@state.meta.current_page} onPaginate={@_handleOnPaginate}/>
+    </div>

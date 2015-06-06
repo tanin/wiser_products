@@ -1,5 +1,5 @@
 @ProductCard = React.createClass
-  displayName: 'PersonCard'
+  displayName: 'ProductCard'
   render: ->
     <tr className="product">
       <td>

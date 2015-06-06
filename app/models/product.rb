@@ -4,4 +4,10 @@ class Product < ActiveRecord::Base
   belongs_to :category
 
   scope :by_category, ->(id){ where(category_id: id) }
+
+  paginates_per 10
+
+  def as_json(options = {})
+    super.merge category: category.as_json
+  end
 end
