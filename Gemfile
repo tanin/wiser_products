@@ -18,6 +18,7 @@ gem 'jquery-turbolinks'
 gem 'react-rails', github: 'reactjs/react-rails', branch: 'master'
 gem 'showdown-rails'
 gem 'sprockets-rails'
+gem 'inherited_resources'
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
