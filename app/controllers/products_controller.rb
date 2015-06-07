@@ -20,6 +20,20 @@ class ProductsController < InheritedResources::Base
     end
   end
 
+  def update
+    update! do |format|
+      if resource.errors.blank?
+        format.json {
+          render json: resource.as_json
+        }
+      else
+        format.json {
+          render json: { error: "Cannot update product", message: resource.errors.full_messages}, status: :unprocessable_entity
+        }
+      end
+    end
+  end
+
   protected
 
   def collection

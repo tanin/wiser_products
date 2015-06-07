@@ -48,6 +48,14 @@
       products: products
       meta: @state.meta
 
+  _updateProduct: (product, data) ->
+    index = @state.products.indexOf product
+    products = React.addons.update(@state.products, { $splice: [[index, 1, data]] })
+    @replaceState
+      didFetchData: true
+      products: products
+      meta: @state.meta
+
   render: ->
     React.DOM.div
       className: 'products'
@@ -62,6 +70,6 @@
             React.DOM.th null, 'Actions'
         React.DOM.tbody null,
           for product in @state.products
-            React.createElement ProductCard, data: product, key: product.id, handleDeleteProduct: @_deleteProduct
+            React.createElement ProductCard, categories: @props.categories, data: product, key: product.id, handleDeleteProduct: @_deleteProduct, handleEditProduct: @_updateProduct
 
       React.createElement Paginator, totalPages: @state.meta.total_pages, currentPage: @state.meta.current_page, onPaginate: @_handleOnPaginate

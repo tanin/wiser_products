@@ -83,6 +83,14 @@ describe ProductsController, type: :controller do
         expect(product.sku).to eq("SKU123")
         expect(product.category.name).to eq("red")
       end
+
+      it "should return an updated product json" do
+        expect(JSON.parse(response.body)["name"]).to eq("new name")
+      end
+
+      it "should contain an category" do
+        expect(JSON.parse(response.body)["category"]).to_not be_blank
+      end
     end
 
     context "with invalid params" do
@@ -101,7 +109,7 @@ describe ProductsController, type: :controller do
       end
 
       it "should return json with error" do
-        expect(JSON.parse(response.body)["errors"]["name"].first).to eq("32 characters is the maximum allowed")
+        expect(JSON.parse(response.body)["error"]).to eq("Cannot update product")
       end
     end
   end
