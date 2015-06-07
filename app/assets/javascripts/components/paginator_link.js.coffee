@@ -6,6 +6,12 @@
     @props.onPaginatorLinkClick(@props.pageNumber)
 
   render: ->
-    React.DOM.a
-      onClick: @_handleOnClick
-      @props.pageNumber
+    if @props.currentPage == @props.pageNumber
+      React.DOM.span
+        className: "visitedPage"
+        @props.pageNumber
+    else
+      React.DOM.a
+        className: "paginationLink"
+        onClick: @_handleOnClick
+        @props.pageNumber
