@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 ruby '2.2.1'
 
 gem 'rails', '4.1.10'
-gem 'sqlite3'
 gem 'sass-rails', '~> 4.0.3'
 gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.0'
@@ -25,7 +24,13 @@ gem 'coffee-rails'
 gem 'sprockets-coffee-react'
 gem 'kaminari'
 
+group :production do
+  gem 'pg'
+  gem 'puma'
+end
+
 group :development, :test do
+  gem 'sqlite3'
   gem 'rspec-rails', '~> 3.0'
   gem 'spring'
   gem "pry-rails"
