@@ -12,5 +12,5 @@
       className: 'pagination'
       for i in [1..@props.totalPages]
         React.DOM.li
-          key: i #XXX
+          key: i
           React.createElement PaginatorLink, pageNumber: i, onPaginatorLinkClick: @_handleOnClick
