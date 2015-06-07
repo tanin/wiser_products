@@ -2,6 +2,7 @@
   displayName: 'ProductCard'
 
   getInitialState: ->
+    error: { name: '', sku: '' }
     edit: false
 
   _handleToggle: (e) ->
@@ -36,22 +37,48 @@
         @setState edit: false
         @props.handleEditProduct @props.data, data
 
+  test_max_chars: (value, max_chars_count) -> if (value != undefined) then value.length > max_chars_count
+  test_min_chars: (value) -> if (value != undefined) then value.length == 0
 
-  recordForm: ->
+  checkErrors: (value, id) ->
+    chars_counts = {name: 32, sku: 6}
+    @error = { name: '', sku: '' }
+
+    if @test_max_chars(value, chars_counts[id])
+      @error[id] = "#{id} field should not have more than #{chars_counts[id]} characters."
+    else if @test_min_chars(value)
+      @error[id] = "#{id} field should not be blank"
+
+    @replaceState
+      error: @error
+      edit: true
+
+  onChange: (e) ->
+    @checkErrors(e.target.value, e.target.id)
+
+  productForm: ->
       React.DOM.tr null,
         React.DOM.td null, @props.data.id
         React.DOM.td null,
           React.DOM.input
             className: 'form-control'
+            id: 'name'
             type: 'text'
             defaultValue: @props.data.name
             ref: 'name'
+            onChange: @onChange
+          if @error != undefined
+            React.DOM.span({className: 'error'}, @error["name"])
         React.DOM.td null,
           React.DOM.input
             className: 'form-control'
+            id: 'sku'
             type: 'text'
             defaultValue: @props.data.sku
             ref: 'sku'
+            onChange: @onChange
+          if @error != undefined
+            React.DOM.span({className: 'error'}, @error["sku"])
         React.DOM.td null,
           React.DOM.select { className: 'form-control', defaultValue: @props.data.category.id, ref: 'category_id' },
             for category in @props.categories
@@ -68,7 +95,7 @@
             onClick: @_handleToggle
             'Cancel'
 
-  recordRow: ->
+  productRow: ->
     React.DOM.tr null,
       React.DOM.td null, @props.data.id
       React.DOM.td null, @props.data.name
@@ -86,6 +113,6 @@
 
   render: ->
     if @state.edit
-      @recordForm()
+      @productForm()
     else
-      @recordRow()
+      @productRow()
