@@ -25,4 +25,9 @@ class ProductsController < InheritedResources::Base
   def collection
     get_collection_ivar || set_collection_ivar(end_of_association_chain.page(params[:page]))
   end
+
+  def permitted_params
+    params = ActionController::Parameters.new(JSON.parse(request.body.read))
+    params.permit({product: [:name, :sku, :category_id]})
+  end
 end
