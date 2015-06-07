@@ -86,10 +86,14 @@
                 value: category.id
                 children: category.name
         React.DOM.td null,
-          React.DOM.a
-            className: 'btn btn-default'
-            onClick: @_handleEdit
-            'Update'
+          if @error != undefined && (@error["name"] != '' || @error["sku"] != '')
+            'No Update'
+          else
+            React.DOM.a
+              className: 'btn btn-default'
+              onClick: @_handleEdit
+              'Update'
+          React.DOM.span null, '  '
           React.DOM.a
             className: 'btn btn-danger'
             onClick: @_handleToggle
@@ -106,6 +110,7 @@
           className: 'btn btn-default'
           onClick: @_handleToggle
           'Edit'
+        React.DOM.span null, '  '
         React.DOM.a
           className: 'btn btn-danger'
           onClick: @_handleDelete
